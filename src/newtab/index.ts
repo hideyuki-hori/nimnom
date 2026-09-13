@@ -5,12 +5,6 @@ import { addDisabledSite, normalizeSite, removeDisabledSite } from '~/lib/disabl
 import { loadDisabledSites, saveDisabledSites } from '~/lib/disable.storage'
 import { byId, inputById } from '~/lib/dom'
 
-const focusedFlag = 'focused'
-
-if (!new URLSearchParams(location.search).has(focusedFlag)) {
-  location.replace(`${location.pathname}?${focusedFlag}`)
-}
-
 const inputEl = inputById('input')
 const errorEl = byId('error')
 const listEl = byId('list')
