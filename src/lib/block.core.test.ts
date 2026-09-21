@@ -5,6 +5,7 @@ import {
   applyUnlock,
   buildBlockRules,
   clearUnlock,
+  findBlockedDomain,
   isUnlockCommand,
   isUnlocked,
   matchesDomain,
@@ -50,6 +51,20 @@ describe('matchesDomain', () => {
   it('末尾が似ているだけの別ドメインにはマッチしない', () => {
     expect(matchesDomain('notyoutube.com', 'youtube.com')).toBe(false)
     expect(matchesDomain('youtube.com.example.com', 'youtube.com')).toBe(false)
+  })
+})
+
+describe('findBlockedDomain', () => {
+  it('ホストにマッチする最初のドメインを返す', () => {
+    const domains = ['youtube.com', 'x.com']
+    expect(findBlockedDomain('x.com', domains)).toBe('x.com')
+    expect(findBlockedDomain('mobile.x.com', domains)).toBe('x.com')
+    expect(findBlockedDomain('www.youtube.com', domains)).toBe('youtube.com')
+  })
+
+  it('マッチしなければnullを返す', () => {
+    expect(findBlockedDomain('example.com', ['youtube.com', 'x.com'])).toBeNull()
+    expect(findBlockedDomain('x.com', [])).toBeNull()
   })
 })
 

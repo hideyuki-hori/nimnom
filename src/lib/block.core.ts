@@ -39,6 +39,10 @@ export function matchesDomain(hostname: string, domain: string): boolean {
   return host === domain || host.endsWith(`.${domain}`)
 }
 
+export function findBlockedDomain(hostname: string, domains: string[]): string | null {
+  return domains.find((domain) => matchesDomain(hostname, domain)) ?? null
+}
+
 export function isUnlockCommand(input: string, domain: string): boolean {
   return input.trim() === `unlock ${domain}`
 }

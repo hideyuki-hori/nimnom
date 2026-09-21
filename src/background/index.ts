@@ -1,4 +1,9 @@
-import { handleReblock, reblockAlarmPrefix, syncBlockRules } from '~/lib/block.gateway'
+import {
+  handleReblock,
+  reblockAlarmPrefix,
+  redirectIfBlocked,
+  syncBlockRules,
+} from '~/lib/block.gateway'
 import type { BookmarkRequest } from '~/lib/bookmarks.core'
 import type { HistoryRequest } from '~/lib/history.core'
 import type { TabRequest } from '~/lib/tabs.core'
@@ -51,6 +56,14 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     void handleReblock(alarm.name.slice(reblockAlarmPrefix.length))
   }
 })
+
+function onNavigation(details: { tabId: number; frameId: number; url: string }): void {
+  if (details.frameId !== 0) return
+  void redirectIfBlocked(details.tabId, details.url)
+}
+
+chrome.webNavigation.onBeforeNavigate.addListener(onNavigation)
+chrome.webNavigation.onCommitted.addListener(onNavigation)
 
 chrome.action.onClicked.addListener(() => {
   void chrome.runtime.openOptionsPage()

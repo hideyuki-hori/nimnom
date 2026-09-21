@@ -3,6 +3,7 @@ import {
   applyUnlock,
   buildBlockRules,
   clearUnlock,
+  findBlockedDomain,
   matchesDomain,
 } from '~/lib/block.core'
 import { loadBlockState, saveBlockState } from '~/lib/block.storage'
@@ -47,6 +48,15 @@ export async function redirectOpenTabs(domain: string): Promise<void> {
       tab.id === undefined ? [] : [chrome.tabs.update(tab.id, { url: blockedPageUrl(domain) })],
     ),
   )
+}
+
+export async function redirectIfBlocked(tabId: number, url: string): Promise<void> {
+  const hostname = tabHostname(url)
+  if (hostname === null) return
+  const state = await loadBlockState()
+  const domain = findBlockedDomain(hostname, activeBlockedDomains(state, Date.now()))
+  if (domain === null) return
+  await chrome.tabs.update(tabId, { url: blockedPageUrl(domain) })
 }
 
 export async function unlockDomain(domain: string): Promise<boolean> {

@@ -3,7 +3,15 @@
   "name": "nimnom",
   "version": "0.1.0",
   "description": "Vim-like keyboard navigation and utilities",
-  "permissions": ["tabs", "bookmarks", "history", "storage", "alarms", "declarativeNetRequest"],
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "history",
+    "storage",
+    "alarms",
+    "declarativeNetRequest",
+    "webNavigation"
+  ],
   "host_permissions": ["<all_urls>"],
   "action": {},
   "options_ui": {
