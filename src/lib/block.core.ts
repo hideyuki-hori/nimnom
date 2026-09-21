@@ -56,7 +56,7 @@ export function activeBlockedDomains(state: BlockState, now: number): string[] {
   return state.domains.filter((domain) => !isUnlocked(state.unlocks, domain, now))
 }
 
-export const unlockDurationMs = 60 * 60 * 1000
+export const unlockDurationMs = 10 * 60 * 1000
 
 function withoutUnlock(unlocks: Record<string, number>, domain: string): Record<string, number> {
   return Object.fromEntries(Object.entries(unlocks).filter(([key]) => key !== domain))

@@ -145,7 +145,7 @@ describe('removeBlockedDomain', () => {
 })
 
 describe('applyUnlock', () => {
-  it('登録済みドメインにnowから1時間の期限を付ける', () => {
+  it('登録済みドメインにnowから10分の期限を付ける', () => {
     const state = { domains: ['youtube.com'], unlocks: {} }
     expect(applyUnlock(state, 'youtube.com', 500)).toEqual({
       state: { domains: ['youtube.com'], unlocks: { 'youtube.com': 500 + unlockDurationMs } },

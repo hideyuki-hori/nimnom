@@ -64,8 +64,8 @@ Keybindings are disabled while an input, textarea, or contenteditable element is
 
 - The new tab page is nimnom's own page: keybindings work there, and it hosts the settings (click the toolbar icon to open it as well). Register domains to block there (subdomains included)
 - When registering, open tabs on that domain are closed after a confirmation
-- On a blocked page, type `unlock <domain>` by hand (paste is disabled) to unlock for one hour
-- When the hour expires, the domain is blocked again and open tabs are redirected to the blocked page
+- On a blocked page, type `unlock <domain>` by hand (paste is disabled) to unlock for ten minutes
+- When the ten minutes expire, the domain is blocked again and open tabs are redirected to the blocked page
 
 ### Disabling nimnom per site
 
