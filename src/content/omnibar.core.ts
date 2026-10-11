@@ -7,6 +7,10 @@ const tabLimit = 5
 const bookmarkLimit = 5
 const historyLimit = 10
 
+export function toOmnibarQuery(text: string): string {
+  return text.replace(/\s+/g, ' ').trim()
+}
+
 export type OmnibarInput = { kind: 'url'; url: string } | { kind: 'search'; url: string }
 
 export function resolveInput(raw: string): OmnibarInput {

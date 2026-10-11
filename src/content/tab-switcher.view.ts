@@ -35,7 +35,7 @@ export async function openTabSwitcher(): Promise<void> {
   if (ui.isOpen()) return
   const tabs = await requestListTabs()
   if (tabs.length === 0) return
-  ui.open(toTabPaletteItems(tabs), activeTabIndex(tabs))
+  ui.open(toTabPaletteItems(tabs), { initialIndex: activeTabIndex(tabs) })
 }
 
 export function handleTabSwitcherKeydown(event: KeyboardEvent): void {

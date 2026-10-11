@@ -54,18 +54,21 @@ export function isOmnibarOpen(): boolean {
   return ui.isOpen()
 }
 
-export async function openOmnibar(): Promise<void> {
+export async function openOmnibar(initialQuery = ''): Promise<void> {
   if (ui.isOpen()) return
   const [tabs, bookmarks, history] = await Promise.all([
     requestListTabs(),
     requestListBookmarks(),
-    requestSearchHistory(''),
+    requestSearchHistory(initialQuery.trim()),
   ])
+  if (ui.isOpen()) return
   cachedTabs = tabs
   cachedBookmarks = bookmarks
-  lastQuery = ''
+  lastQuery = initialQuery
   requestToken += 1
-  ui.open(buildOmnibarItems({ query: '', tabs, bookmarks, history }))
+  ui.open(buildOmnibarItems({ query: initialQuery, tabs, bookmarks, history }), {
+    query: initialQuery,
+  })
 }
 
 export function handleOmnibarKeydown(event: KeyboardEvent): void {

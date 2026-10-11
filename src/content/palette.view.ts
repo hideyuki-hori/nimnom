@@ -27,9 +27,14 @@ type OpenState<Command extends string> = {
   machine: Palette<Command>
 }
 
+export type OpenOptions = {
+  initialIndex?: number
+  query?: string
+}
+
 export type PaletteUi = {
   isOpen(): boolean
-  open(items: PaletteItem[], initialIndex?: number): void
+  open(items: PaletteItem[], options?: OpenOptions): void
   close(): void
   setItems(items: PaletteItem[]): void
   handleKeydown(event: KeyboardEvent): void
@@ -122,9 +127,11 @@ export function createPaletteUi<Command extends string>(
     }
   }
 
-  function open(items: PaletteItem[], initialIndex = 0): void {
+  function open(items: PaletteItem[], options: OpenOptions = {}): void {
     if (state) return
-    const machine = createPalette(items, config, initialIndex)
+    const machine = createPalette(items, config, options.initialIndex ?? 0)
+    const query = options.query ?? ''
+    if (!callbacks.onQueryChange) machine.setQuery(query)
     const host = document.createElement('div')
     const shadow = host.attachShadow({ mode: 'open' })
     const style = document.createElement('style')
@@ -134,6 +141,7 @@ export function createPaletteUi<Command extends string>(
     const input = document.createElement('input')
     input.className = 'search'
     input.placeholder = '/で検索'
+    input.value = query
     input.addEventListener('keydown', (event) => {
       event.stopPropagation()
     })

@@ -1,5 +1,15 @@
 import { describe, expect, it } from 'vitest'
-import { buildOmnibarItems, parseOmnibarId, resolveInput } from './omnibar.core'
+import { buildOmnibarItems, parseOmnibarId, resolveInput, toOmnibarQuery } from './omnibar.core'
+
+describe('toOmnibarQuery', () => {
+  it('改行や連続した空白を1つの空白にまとめて前後を削る', () => {
+    expect(toOmnibarQuery('  rust\n  lifetimes\t\n')).toBe('rust lifetimes')
+  })
+
+  it('URLはそのまま残す', () => {
+    expect(toOmnibarQuery('https://example.com/a?b=c\n')).toBe('https://example.com/a?b=c')
+  })
+})
 
 describe('resolveInput', () => {
   it('スキーム付きはそのままURLとして扱う', () => {

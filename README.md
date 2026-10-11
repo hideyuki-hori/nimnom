@@ -25,6 +25,7 @@ If you want a meaning, *nim* is from *nimble*, and *nom* is the sound of somethi
 | `t` | Open a new tab |
 | `T` | Open the tab switcher |
 | `o` | Open the omnibar (tabs / bookmarks / history / URL / search) |
+| `p` | Open the omnibar with the clipboard text filled in |
 | `b` | Open the bookmark palette |
 | `m` | Toggle sticky memos |
 | `x` | Close the current tab |
@@ -45,6 +46,7 @@ Keybindings are disabled while an input, textarea, or contenteditable element is
 - The first row opens the raw input: URLs are opened directly, anything else becomes a Google search
 - Arrow keys to select, `Enter` opens in the current tab, `Shift+Enter` in a new tab
 - Selecting an open tab switches to it
+- `p` opens the omnibar with the clipboard text already typed, so `Enter` opens a copied URL or searches copied text (Chrome does not let extensions write into the address bar itself)
 
 ### Bookmark palette (`b`)
 

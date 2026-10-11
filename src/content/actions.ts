@@ -1,7 +1,9 @@
 import { openBookmarkPalette } from './bookmarks.view'
+import { readClipboardText } from './clipboard'
 import { openHints } from './hint.view'
 import type { Action } from './keybinds.core'
 import { toggleMemo } from './memo.view'
+import { toOmnibarQuery } from './omnibar.core'
 import { openOmnibar } from './omnibar.view'
 import { createScroller } from './scroll.driver'
 import { openTabSwitcher } from './tab-switcher.view'
@@ -49,6 +51,9 @@ const performers: Record<Action, (repeat: boolean) => void> = {
   },
   openOmnibar() {
     void openOmnibar()
+  },
+  openOmnibarWithClipboard() {
+    void openOmnibar(toOmnibarQuery(readClipboardText()))
   },
   closeCurrentTab() {
     void requestCloseCurrentTab()

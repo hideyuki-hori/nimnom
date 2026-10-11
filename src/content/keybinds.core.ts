@@ -12,6 +12,7 @@ export type Action =
   | 'openTabSwitcher'
   | 'openNewTab'
   | 'openOmnibar'
+  | 'openOmnibarWithClipboard'
   | 'closeCurrentTab'
   | 'reloadPage'
   | 'enterHintMode'
@@ -35,6 +36,7 @@ export const defaultKeybinds: Keybind[] = [
   { sequence: [key('t')], action: 'openNewTab' },
   { sequence: [key('T')], action: 'openTabSwitcher' },
   { sequence: [key('o')], action: 'openOmnibar' },
+  { sequence: [key('p')], action: 'openOmnibarWithClipboard' },
   { sequence: [key('x')], action: 'closeCurrentTab' },
   { sequence: [key('r')], action: 'reloadPage' },
   { sequence: [key('f')], action: 'enterHintMode' },
